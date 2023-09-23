@@ -1,0 +1,51 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.Container {display: flex;
+    flex-direction:column ;
+    justify-content: flex-start;
+    padding:2em;
+    align-items: flex-start;
+    background-color:white
+    }
+.QA-Wrapper{
+    display:flex;
+    padding:0.2em;
+    flex-direction:column
+}
+.QA-Wrapper-Questions{padding:"0.2em";
+display: flex; gap:2em;
+}
+.QA-Wrapper-Questions-EditButton{
+visibility: hidden;
+background-color: transparent;
+border: none;
+}
+.QA-Wrapper-Questions:hover .QA-Wrapper-Questions-EditButton{
+    visibility:visible;
+}
+
+.QA-Wrapper-Answers{
+    padding:0.2em;
+    display:flex;
+    gap:1em;
+    flex-direction:row;
+}
+.Buttons-Wrapper{
+    padding:2em;
+    display: flex;
+    gap: 2em;
+    
+}
+.Buttons-Wrapper-Add{
+    max-width:6em;
+     align-self:center;
+     background-color:transparent;
+     border:none
+    } 
+.Buttons-Wrapper-Submit{
+    background-color: transparent;
+    border-style:groove;
+    border-radius: 0.5em;
+    align-content: center;
+}

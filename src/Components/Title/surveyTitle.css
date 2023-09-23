@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.Title-Container{
+     display: flex;
+      justify-content: center;
+       align-items: center;
+       background-color: #372436;
+       color:white;
+       font-family:Comfortaa;
+       font-weight:bold;
+       text-transform:uppercase
+    }
+    .Title-Container:hover .Title-ContainerButton{
+        visibility: visible;
+    }
+    .Title-ContainerButton{
+        visibility: hidden;
+        background-color: transparent;
+        border: none;
+    }
