@@ -57,7 +57,7 @@ export default function EditSurvey({ setView }) {
 
     // Assuming you have updated data that you want to send for the update
     axios
-      .put(`http://localhost:3100/QAsPut/${selectedId}`, updatedDataWithCurrentTitle)
+      .put(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsPut/${selectedId}`, updatedDataWithCurrentTitle)
       .then((response) => {
         // Handle the successful update, if needed
         console.log('Data updated successfully', response.data);
