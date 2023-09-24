@@ -123,7 +123,7 @@ const handleShowHideAnswerInput = (index) => {
   }));
 }
 
-const handleAddAnswer = (index) => {
+let handleAddAnswer = (index) => {
   let newData = [...filteredData];
   if (Array.isArray(newData[index].answer)) {
     newData[index].answer.push('');

@@ -66,7 +66,7 @@ export default function SurveyQuestion({ title }) {
 
       axios.post('https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsPost', {
         question: question,
-        answers: answers,
+        answer: answers,
         title: surveyTitle
       })
       .then(response => {
