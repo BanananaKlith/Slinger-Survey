@@ -61,8 +61,13 @@ border: none;
      display:flex;
      align-items:center
   }
-  
-  .Container-Wrapper:hover .Container-Wrapper-Button {
+ .QA-Wrapper-Answers-EditButton
+ {visibility: hidden;
+background-color: transparent;
+border: none;
+cursor: pointer;}
+
+ .QA-Wrapper-Answers:hover .QA-Wrapper-Answers-EditButton{
       visibility: visible;
       }
   

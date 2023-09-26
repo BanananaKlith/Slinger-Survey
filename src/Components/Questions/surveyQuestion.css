@@ -20,6 +20,7 @@ display: flex; gap:2em;
 visibility: hidden;
 background-color: transparent;
 border: none;
+cursor: pointer;
 }
 .QA-Wrapper-Questions:hover .QA-Wrapper-Questions-EditButton{
     visibility:visible;

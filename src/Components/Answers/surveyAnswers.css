@@ -19,6 +19,7 @@
       margin:1em;
       padding:0.2em;
       background-color:transparent;
-      border:none 
+      border:none;
+      cursor: pointer;
     }
 
