@@ -170,7 +170,7 @@ return (
               onChange={(e) => setUpdatedData({ ...updatedData, question: e.target.value })}
               placeholder="Edit Question"
             />
-            <button onClick={() => handleShowHideQuestionInput(index)}>Toggle Question Input</button>
+            <button className='Container-Question-Button' onClick={() => handleShowHideQuestionInput(index)}><ModeEditOutline /></button>
 
             {Array.isArray(item.answer) ? (
               item.answer.map((answer, i) => (
@@ -183,7 +183,8 @@ return (
                     onChange={(e) => handleAnswerEdit(index, i, e.target.value)}
                     placeholder="Edit Answer"
                   />
-                  <button  className="QA-Wrapper-Answers-EditButton" onClick={() => handleShowHideAnswerInput(index, i)}><ModeEditOutline /></button>
+                  <button  className="QA-Wrapper-Answers-EditButton" 
+                  onClick={() => handleShowHideAnswerInput(index, i)}><ModeEditOutline /></button>
                 </div>
               ))
             ) : (

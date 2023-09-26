@@ -9,6 +9,11 @@
     align-items: flex-start;
     background-color:white
     }
+    .Container-Question-Button{visibility: hidden;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;}
+        .Container:hover .Container-Question-Button{visibility: visible;}
 .QA-Wrapper{
     display:flex;
     padding:0.2em;
