@@ -42,36 +42,7 @@ export default function EditSurvey({ setView }) {
     }
   }, [selectedTitle, data]);
 
-  const handleUpdateClick = () => {
-    if (!selectedId) {
-      console.error('No document selected for update');
-      return;
-    }
-
-    const currentTitle = filteredData.find((item) => item._id === selectedId).title;
-    const updatedDataWithCurrentTitle = {
-      ...updatedData,
-      title: currentTitle,
-    };
-
-    axios
-      .put(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsPut/${selectedId}`, updatedDataWithCurrentTitle)
-      .then((response) => {
-        console.log('Data updated successfully', response.data);
-        axios
-          .get('https://apitestdocfile-4yzlt7tvdq-no.a.run.app/Qas')
-          .then((response) => {
-            setData(response.data);
-            setUpdatedData({});
-          })
-          .catch((error) => {
-            console.error(`Error fetching updated data: ${error}`);
-          });
-      })
-      .catch((error) => {
-        console.error('Error updating data', error);
-      });
-  };
+  
 
   const handleAnswerEdit = (index, answerIndex, newText) => {
     setFilteredData((prevData) => {
@@ -138,7 +109,60 @@ const handleShowHideAnswerInput = (itemIndex, answerIndex) => {
   });
 };
 
+const handleUpdateClick = () => {
+  if (!selectedId) {
+    console.error('No document selected for update');
+    return;
+  }
 
+  const currentItem = filteredData.find((item) => item._id === selectedId);
+  const currentTitle = currentItem.title;
+  let updatedDataWithCurrentTitle = {
+    ...updatedData,
+    title: currentTitle,
+  };
+
+  // Initialize updatedDataWithCurrentTitle.answer and updatedDataWithCurrentTitle.question if they don't exist
+  if (!updatedDataWithCurrentTitle.answer) {
+    updatedDataWithCurrentTitle.answer = [];
+  }
+  
+  if (!updatedDataWithCurrentTitle.question) {
+    updatedDataWithCurrentTitle.question = currentItem.question;
+  }
+
+  // Check if answers have been edited or are empty
+  currentItem.answer.forEach((ans, index) => {
+    if (!updatedData.answer || !updatedData.answer[index]) {
+      updatedDataWithCurrentTitle.answer[index] = ans;
+    }
+  });
+
+  // Check if question has been edited or is empty
+  if (!updatedData.question || updatedData.question === '') {
+    updatedDataWithCurrentTitle.question = currentItem.question;
+  }
+
+  
+
+  axios
+    .put(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsPut/${selectedId}`, updatedDataWithCurrentTitle)
+    .then((response) => {
+      console.log('Data updated successfully', response.data);
+      axios
+        .get('https://apitestdocfile-4yzlt7tvdq-no.a.run.app/Qas')
+        .then((response) => {
+          setData(response.data);
+          setUpdatedData({});
+        })
+        .catch((error) => {
+          console.error(`Error fetching updated data: ${error}`);
+        });
+    })
+    .catch((error) => {
+      console.error('Error updating data', error);
+    });
+};
 
 return (
   <>
