@@ -8,7 +8,6 @@ export default function EditSurvey({ setView }) {
   const [selectedTitle, setSelectedTitle] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [uniqueTitles, setUniqueTitles] = useState([]);
-  const [selectedId, setSelectedId] = useState(null);
   const [updatedData, setUpdatedData] = useState({});
 
   useEffect(() => {
@@ -36,7 +35,6 @@ export default function EditSurvey({ setView }) {
           (Array.isArray(item.answer) ? item.answer.length > 0 : item.answer.trim() !== '')
       );
       setFilteredData(result);
-      setSelectedId(null);
     } else {
       setFilteredData([]);
     }
@@ -45,6 +43,7 @@ export default function EditSurvey({ setView }) {
   
 
   const handleAnswerEdit = (index, answerIndex, newText) => {
+    
     setFilteredData((prevData) => {
       const newData = [...prevData];
       if (Array.isArray(newData[index].answer)) {
@@ -109,13 +108,13 @@ const handleShowHideAnswerInput = (itemIndex, answerIndex) => {
   });
 };
 
-const handleUpdateClick = () => {
-  if (!selectedId) {
+const handleUpdateClick = (itemId) => {
+  if (itemId===undefined) {
     console.error('No document selected for update');
     return;
   }
 
-  const currentItem = filteredData.find((item) => item._id === selectedId);
+  const currentItem = filteredData.find((item) => item._id === itemId);
   const currentTitle = currentItem.title;
   let updatedDataWithCurrentTitle = {
     ...updatedData,
@@ -141,12 +140,12 @@ const handleUpdateClick = () => {
   // Check if question has been edited or is empty
   if (!updatedData.question || updatedData.question === '') {
     updatedDataWithCurrentTitle.question = currentItem.question;
-  }
+  };
 
   
 
   axios
-    .put(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsPut/${selectedId}`, updatedDataWithCurrentTitle)
+    .put(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsPut/${itemId}`, updatedDataWithCurrentTitle)
     .then((response) => {
       console.log('Data updated successfully', response.data);
       axios
@@ -185,7 +184,7 @@ return (
           <h1>Current survey Title : {filteredData[0].title}</h1>
         </div>
         {filteredData.map((item, index) => (
-          <div className="Container" key={index} onClick={() => setSelectedId(item._id)}>
+          <div className="Container" key={index}  >
             <h2 className="QA-Wrapper-Questions">{item.question}</h2>
             <input
               type="text"
@@ -226,7 +225,7 @@ return (
 
             <button onClick={() => handleAddAnswer(index)}>Add Answer</button>
 
-            <button onClick={handleUpdateClick}>Update Data</button>
+            <button onClick={()=>handleUpdateClick(item._id)}>Update Data</button>
           </div>
         ))}
       </>
