@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {  ModeEditOutline } from "@mui/icons-material";
-import "./editSurvey.css"
+import { ModeEditOutline } from "@mui/icons-material";
+class Fields {
+  constructor(id, question, answer, title) {
+    this.id = id;
+    this.question = question;
+    this.answer = Array.isArray(answer) && answer.every(item => typeof item === 'string') ? answer : [answer.toString()];
+    this.title = title;
+  }
+}
 
 export default function EditSurvey({ setView }) {
   const [data, setData] = useState([]);
-  const [selectedTitle, setSelectedTitle] = useState('');
-  const [filteredData, setFilteredData] = useState([]);
   const [uniqueTitles, setUniqueTitles] = useState([]);
-  const [updatedData, setUpdatedData] = useState({});
+  const [selectedTitle, setSelectedTitle] = useState('');
+  const [visibleFields, setVisibleFields] = useState({});
 
   useEffect(() => {
     axios
       .get('https://apitestdocfile-4yzlt7tvdq-no.a.run.app/Qas')
       .then((response) => {
-        setData(response.data);
+        const fieldsData = response.data.map(item => new Fields(item._id, item.question, item.answer, item.title));
+        setData(fieldsData);
       })
       .catch((error) => {
         console.error(`Error fetching data: ${error}`);
@@ -26,214 +33,161 @@ export default function EditSurvey({ setView }) {
     setUniqueTitles(Array.from(titlesSet));
   }, [data]);
 
-  useEffect(() => {
-    if (selectedTitle) {
-      const result = data.filter(
-        (item) =>
-          item.title === selectedTitle &&
-          item.answer &&
-          (Array.isArray(item.answer) ? item.answer.length > 0 : item.answer.trim() !== '')
-      );
-      setFilteredData(result);
-    } else {
-      setFilteredData([]);
-    }
-  }, [selectedTitle, data]);
-
-  
-
-  const handleAnswerEdit = (index, answerIndex, newText) => {
-    
-    setFilteredData((prevData) => {
-      const newData = [...prevData];
-      if (Array.isArray(newData[index].answer)) {
-        newData[index].answer[answerIndex] = newText;
-      } else {
-        newData[index].answer = newText;
-      }
-      return newData;
-    });
-
-    setUpdatedData((prevUpdatedData) => {
-      const newUpdatedData = { ...prevUpdatedData };
-      if (!newUpdatedData.answer) {
-        newUpdatedData.answer = [];
-      }
-      if (Array.isArray(newUpdatedData.answer)) {
-        newUpdatedData.answer[answerIndex] = newText;
-      } else {
-        newUpdatedData.answer = [newText];
-      }
-      return newUpdatedData;
-    });
+  const handleTitleChange = (event) => {
+    setSelectedTitle(event.target.value);
   };
 
-  const handleShowHideQuestionInput = (index) => {
-    setFilteredData((prevData) =>
-      prevData.map((item, i) => {
-        if (i === index) {
-          return { ...item, showQuestionInput: !item.showQuestionInput };
-        } else {
-          return item;
-        }
+  const handleInputChange = (event, fieldId, answerIndex) => {
+    const newData = [...data];
+    const field = newData.find(field => field.id === fieldId);
+    field.answer[answerIndex] = event.target.value;
+    setData(newData);
+  };
+
+  const handleQuestionChange = (event, fieldId) => {
+    const newData = [...data];
+    const field = newData.find(field => field.id === fieldId);
+    field.question = event.target.value;
+    setData(newData);
+  };
+
+  const handleUpdate = (fieldId) => {
+    const fieldToUpdate = data.find(field => field.id === fieldId);
+    axios
+      .put(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsPut/${fieldToUpdate.id}`, {title: fieldToUpdate.title,question: fieldToUpdate.question, answer: fieldToUpdate.answer})
+      .then((response) => {
+        console.log(`Update successful: ${response}`);
       })
-    );
+      .catch((error) => {
+        console.error(`Error updating data: ${error}`);
+      });
   };
 
- 
-
-  const handleAddAnswer = (index) => {
-    let newData = [...filteredData];
-    if (Array.isArray(newData[index].answer)) {
-      newData[index].answer.push('');
-    } else {
-      newData[index].answer = [newData[index].answer, ''];
-    }
-    setFilteredData(newData);
+  const toggleVisibility = (fieldId) => {
+    setVisibleFields(prevVisibleFields => ({
+      ...prevVisibleFields,
+      [fieldId]: !prevVisibleFields[fieldId],
+    }));
   };
 
-  const handleView = () => setView('createSurvey');
+  const filteredData = data.filter(item => item.title === selectedTitle);
 
-// Create a new state variable for the visibility of the answer inputs
-const [showAnswerInput, setShowAnswerInput] = useState(filteredData.map(item => (Array.isArray(item.answer) ? item.answer.map(() => false) : [false])));
-const handleShowHideAnswerInput = (itemIndex, answerIndex) => {
-  setShowAnswerInput((prevShowAnswerInput) => {
-    // Create a deep copy of the array
-    const newShowAnswerInput = JSON.parse(JSON.stringify(prevShowAnswerInput));
-    if (!newShowAnswerInput[itemIndex]) {
-      newShowAnswerInput[itemIndex] = [];
-    }
-    newShowAnswerInput[itemIndex][answerIndex] = !newShowAnswerInput[itemIndex][answerIndex];
-    return newShowAnswerInput;
-  });
-};
-
-const handleUpdateClick = (itemId) => {
-  if (itemId===undefined) {
-    console.error('No document selected for update');
-    return;
-  }
-
-  const currentItem = filteredData.find((item) => item._id === itemId);
-  const currentTitle = currentItem.title;
-  let updatedDataWithCurrentTitle = {
-    ...updatedData,
-    title: currentTitle,
-  };
-
-  // Initialize updatedDataWithCurrentTitle.answer and updatedDataWithCurrentTitle.question if they don't exist
-  if (!updatedDataWithCurrentTitle.answer) {
-    updatedDataWithCurrentTitle.answer = [];
-  }
+  const handleAddAnswer = (fieldId) => {
+    // Find the field to update
+    const fieldToUpdate = data.find(field => field.id === fieldId);
   
-  if (!updatedDataWithCurrentTitle.question) {
-    updatedDataWithCurrentTitle.question = currentItem.question;
-  }
-
-  // Check if answers have been edited or are empty
-  currentItem.answer.forEach((ans, index) => {
-    if (!updatedData.answer || !updatedData.answer[index]) {
-      updatedDataWithCurrentTitle.answer[index] = ans;
-    }
-  });
-
-  // Check if question has been edited or is empty
-  if (!updatedData.question || updatedData.question === '') {
-    updatedDataWithCurrentTitle.question = currentItem.question;
-  };
-
+    // Add a new answer to the field's answers
+    const updatedAnswers = [...fieldToUpdate.answer, 'added answer'];
   
-
-  axios
-    .put(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsPut/${itemId}`, updatedDataWithCurrentTitle)
-    .then((response) => {
-      console.log('Data updated successfully', response.data);
-      axios
-        .get('https://apitestdocfile-4yzlt7tvdq-no.a.run.app/Qas')
-        .then((response) => {
-          setData(response.data);
-          setUpdatedData({});
-        })
-        .catch((error) => {
-          console.error(`Error fetching updated data: ${error}`);
+    // Update the field in the data
+    axios
+      .put(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsPut/${fieldToUpdate.id}`, {title: fieldToUpdate.title, question: fieldToUpdate.question, answer: updatedAnswers})
+      .then((response) => {
+        console.log(`Update successful: ${response}`);
+  
+        // Update the local state with the new data
+        const updatedData = data.map(field => {
+          if (field.id === fieldId) {
+            return {...field, answer: updatedAnswers};
+          } else {
+            return field;
+          }
         });
-    })
-    .catch((error) => {
-      console.error('Error updating data', error);
-    });
-};
+        setData(updatedData);
+      })
+      .catch((error) => {
+        console.error(`Error updating data: ${error}`);
+      });
+  };
 
-return (
-  <>
+  const handleDeleteAnswer = (fieldId, answerIndex) => {
+    // Find the field to update
+    const fieldToUpdate = data.find(field => field.id === fieldId);
+  
+    // Remove the answer from the field's answers
+    const updatedAnswers = fieldToUpdate.answer.filter((_, index) => index !== answerIndex);
+  
+    // Update the field in the data
+    axios
+      .put(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsPut/${fieldToUpdate.id}`, {title: fieldToUpdate.title, question: fieldToUpdate.question, answer: updatedAnswers})
+      .then((response) => {
+        console.log(`Update successful: ${response}`);
+  
+        // Update the local state with the new data
+        const updatedData = data.map(field => {
+          if (field.id === fieldId) {
+            return {...field, answer: updatedAnswers};
+          } else {
+            return field;
+          }
+        });
+        setData(updatedData);
+      })
+      .catch((error) => {
+        console.error(`Error updating data: ${error}`);
+      });
+  };
+
+  const handleDeleteQuestion = (fieldId) => {
+    // Delete the field from the data
+    axios
+      .delete(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsDelete/${fieldId}`)
+      .then((response) => {
+        console.log(`Delete successful: ${response}`);
+      })
+      .catch((error) => {
+        console.error(`Error deleting data: ${error}`);
+      });
+  };
+
+  return (
     <div>
-      <label>All Surveys: </label>
-      <select value={selectedTitle} onChange={(e) => setSelectedTitle(e.target.value)}>
-        <option value="">Surveys</option>
-        {uniqueTitles.map((title) => (
-          <option key={title} value={title}>
+      <div style={{display:"flex",alignItems:"center"}}>  <h1 style={{padding:"1em"}}>{selectedTitle}</h1>
+      <select style={{backgroundColor:"transparent",padding:"1em",cursor:"pointer"}} onChange={handleTitleChange}>
+        <option value="">Select a title</option>
+        {uniqueTitles.map((title, index) => (
+          <option key={index} value={title}>
             {title}
           </option>
         ))}
-      </select>{' '}
-      <button onClick={handleView}>Create New Survey</button>
+      </select>
+      <><button style={{backgroundColor:"transparent",margin:"2em",padding:"1em",cursor:"pointer"}} onClick={()=>setView("createSurvey")}>Create a new survey</button></>
+      </div>
+    
+
+      {filteredData.map((field) => (<div style={{
+              padding: "2em",
+              backgroundImage: "linear-gradient(to right, black 50%, transparent 50%)",
+              backgroundSize: "100% 1px",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "bottom"
+            }} key={field.id}>
+
+    <div style={{display:"flex",}}>
+      <h2>{field.question}</h2>
+      {visibleFields[field.id] && (
+        <input style={{margin:"1em",alignSelf:"center",padding:"1em"}} id={`question-${field.id}`} type="text" onChange={(event) => handleQuestionChange(event, field.id)} />
+      )}
+      <button style={{padding:"2em",backgroundColor:"transparent",cursor:"pointer",border:"none"}} onClick={() => toggleVisibility(field.id)}>
+        <ModeEditOutline/>
+      </button>
     </div>
+    {field.answer.map((answer, answerIndex) => (
+      <div style={{display:"flex",alignItems:"baseline"}} key={answerIndex}>
+        <p style={{minWidth:"10em"}}>{answer}</p>
+        <button style={{borderRadius:"10%", padding:"0.5em", cursor:"pointer", backgroundColor:"transparent"}} onClick={() => handleDeleteAnswer(field.id, answerIndex)}>Delete</button>
+               {visibleFields[field.id] && (
+          <input style={{margin:"0.5em",padding:"0.5em"}} id={`input-${field.id}-${answerIndex}`} type="text" onChange={(event) => handleInputChange(event, field.id, answerIndex)} />
+          
+       )}
+      </div>
+    ))}
+    <button style={{borderRadius:"10%",padding:"1em",cursor:"pointer",backgroundColor:"transparent"}}onClick={() => handleUpdate(field.id)}>Update</button>
+    <button style={{borderRadius:"10%", padding:"1em", cursor:"pointer", backgroundColor:"transparent"}} onClick={() => handleAddAnswer(field.id)}>Add Answer</button>
+    <button style={{borderRadius:"10%", padding:"1em", cursor:"pointer", backgroundColor:"transparent"}} onClick={() => handleDeleteQuestion(field.id)}>Delete Question</button>           
+  </div>
+))}
 
-    {filteredData.length > 0 ? (
-      <>
-        <div className="Title-Container">
-          <h1>Current survey Title : {filteredData[0].title}</h1>
-        </div>
-        {filteredData.map((item, index) => (
-          <div className="Container" key={index}  >
-            <h2 className="QA-Wrapper-Questions">{item.question}</h2>
-            <input
-              type="text"
-              style={{ display: item.showQuestionInput ? 'block' : 'none' }}
-              value={updatedData.question || ''}
-              onChange={(e) => setUpdatedData({ ...updatedData, question: e.target.value })}
-              placeholder="Edit Question"
-            />
-            <button className='Container-Question-Button' onClick={() => handleShowHideQuestionInput(index)}><ModeEditOutline /></button>
-
-            {Array.isArray(item.answer) ? (
-              item.answer.map((answer, i) => (
-                <div className="QA-Wrapper-Answers" key={i}>
-                  <p>{answer || ''}</p>
-                  <input
-                    type="text"
-                    style={{ display: showAnswerInput[index] && showAnswerInput[index][i] ? 'block' : 'none' }}
-                    value={answer || ''}
-                    onChange={(e) => handleAnswerEdit(index, i, e.target.value)}
-                    placeholder="Edit Answer"
-                  />
-                  <button  className="QA-Wrapper-Answers-EditButton" 
-                  onClick={() => handleShowHideAnswerInput(index, i)}><ModeEditOutline /></button>
-                </div>
-              ))
-            ) : (
-              <div>
-                <p>{item.answer && item.answer.text ? item.answer.text : ''}</p>
-                <input
-                  type="text"
-                  style={{ display: item.answer && item.answer.showAnswerInput ? 'block' : 'none' }}
-                  value={item.answer && item.answer.text ? item.answer.text : ''}
-                  onChange={(e) => handleAnswerEdit(index, null, e.target.value)}
-                  placeholder="Edit Answer"
-                />
-              </div>
-            )}
-
-            <button onClick={() => handleAddAnswer(index)}>Add Answer</button>
-
-            <button onClick={()=>handleUpdateClick(item._id)}>Update Data</button>
-          </div>
-        ))}
-      </>
-    ) : (
-      <p>No data available for the selected title.</p>
-    )}
-  </>
-);
-
+    </div>
+  );
 }
-

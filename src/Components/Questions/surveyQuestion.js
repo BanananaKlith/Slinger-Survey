@@ -7,13 +7,13 @@ import axios from 'axios';
 export default function SurveyQuestion({ title }) {
   const [questions, setQuestions] = useState([
     {
-      textQuestion: "Survey Question 1",
+      textQuestion: "New survey Question",
       showText: false,
       answers: [
-        { textAnswer: "Answer number 1 kid", showInput: false },
-        { textAnswer: "Answer number 2 kid", showInput: false },
-        { textAnswer: "Answer number 3 kid", showInput: false },
-        { textAnswer: "Answer number 4 kid", showInput: false }
+        { textAnswer: "Answer", showInput: false },
+        { textAnswer: "Answer", showInput: false },
+        { textAnswer: "Answer", showInput: false },
+        { textAnswer: "Answer", showInput: false }
       ]
     }
   ]);
@@ -118,7 +118,7 @@ export default function SurveyQuestion({ title }) {
             </button>
           </div>
           <div className="QA-Wrapper-Answers">
-            <SurveyAnswers
+            <SurveyAnswers 
               inputs={question.answers}
               handleTextChange={(answerIndex, newText) =>
                 handleTextChange(questionIndex, answerIndex, newText)
@@ -132,7 +132,7 @@ export default function SurveyQuestion({ title }) {
           <AddCircle />
         </button>
         <button className="Buttons-Wrapper-Send" onClick={handleSubmit}>
-          Send Question & Answers
+          Create Survey
         </button>
       </div>
     </div>

@@ -8,8 +8,11 @@ function CreateSurvey({setView}) {
   return (
 
         <>
-          <><button onClick={()=>setView("editSurvey")}>Browse Surveys</button></>
-          <SurveyTitle title={title} setTitle={setTitle}/>
+         <> <div style={{display:"flex"}}className="Title-Container"> <SurveyTitle title={title} setTitle={setTitle}/>
+         <button style={{backgroundColor:"transparent",color:"white",margin:"2em",padding:"1em",borderRadius:"8%",cursor:"pointer"}} 
+          onClick={()=>setView("editSurvey")}>Browse Surveys</button>
+          </div>
+          </>
           <SurveyQuestion title={title}/>
         
         </>
