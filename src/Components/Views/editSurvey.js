@@ -33,6 +33,21 @@ export default function EditSurvey({ setView }) {
     setUniqueTitles(Array.from(titlesSet));
   }, [data]);
 
+  const handleDeleteQuestion = (fieldId) => {
+    // Delete the field from the data
+    axios
+      .delete(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsDelete/${fieldId}`)
+      .then((response) => {
+        console.log(`Delete successful: ${response}`);
+        // Update the state after deletion
+        setData(data.filter(item => item.id !== fieldId));
+      })
+      .catch((error) => {
+        console.error(`Error deleting data: ${error}`);
+      });
+  };
+  
+
   const handleTitleChange = (event) => {
     setSelectedTitle(event.target.value);
   };
@@ -128,17 +143,7 @@ export default function EditSurvey({ setView }) {
       });
   };
 
-  const handleDeleteQuestion = (fieldId) => {
-    // Delete the field from the data
-    axios
-      .delete(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsDelete/${fieldId}`)
-      .then((response) => {
-        console.log(`Delete successful: ${response}`);
-      })
-      .catch((error) => {
-        console.error(`Error deleting data: ${error}`);
-      });
-  };
+
 
   return (
     <div>
