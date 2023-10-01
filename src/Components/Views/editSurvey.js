@@ -143,7 +143,30 @@ export default function EditSurvey({ setView }) {
       });
   };
 
-
+  const handleAddField = () => {
+    // Create a new field with empty text
+    const newField = { question: 'Edit me please', answer: 'Edit me please', title: selectedTitle };
+  
+    axios
+      .post('https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsPost', newField)
+      .then((response) => {
+        console.log(`Field added: ${response}`);
+        // Fetch the updated data
+        axios
+          .get('https://apitestdocfile-4yzlt7tvdq-no.a.run.app/Qas')
+          .then((response) => {
+            const fieldsData = response.data.map(item => new Fields(item._id, item.question, item.answer, item.title));
+            setData(fieldsData);
+          })
+          .catch((error) => {
+            console.error(`Error fetching data: ${error}`);
+          });
+      })
+      .catch((error) => {
+        console.error(`Error adding field: ${error}`);
+      });
+  };
+  
 
   return (
     <div>
@@ -190,9 +213,12 @@ export default function EditSurvey({ setView }) {
     <button style={{borderRadius:"10%",padding:"1em",cursor:"pointer",backgroundColor:"transparent"}}onClick={() => handleUpdate(field.id)}>Update</button>
     <button style={{borderRadius:"10%", padding:"1em", cursor:"pointer", backgroundColor:"transparent"}} onClick={() => handleAddAnswer(field.id)}>Add Answer</button>
     <button style={{borderRadius:"10%", padding:"1em", cursor:"pointer", backgroundColor:"transparent"}} onClick={() => handleDeleteQuestion(field.id)}>Delete Question</button>           
+  
   </div>
 ))}
-
+     {selectedTitle !== "" && (
+      <button style={{marginLeft:"5em",borderRadius:"10%", padding:"1em", cursor:"pointer", backgroundColor:"transparent"}} onClick={handleAddField}> Add Field</button>
+    )}
     </div>
   );
 }
