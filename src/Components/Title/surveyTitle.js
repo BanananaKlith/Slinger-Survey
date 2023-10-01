@@ -12,7 +12,7 @@ export default function SurveyTitle({ title, setTitle }) {
   return (
     <>
       <div className="Title-Container">
-        <h1>{title}</h1>
+        <h1 style={{cursor:"pointer"}}>{title}</h1>
         {showInput && <input type='text' onChange={handleInputChange} />}
         <button className='Title-ContainerButton' onClick={() => setShowInput(!showInput)}><ModeEditOutline color='primary'/></button>
       </div>

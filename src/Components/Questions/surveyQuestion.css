@@ -42,11 +42,13 @@ cursor: pointer;
     max-width:6em;
      align-self:center;
      background-color:transparent;
-     border:none
+     border:none;
+     cursor: pointer;
     } 
 .Buttons-Wrapper-Submit{
     background-color: transparent;
     border-style:groove;
     border-radius: 0.5em;
     align-content: center;
+    cursor: pointer;
 }
