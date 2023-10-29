@@ -42,7 +42,7 @@ function App() {
   
 
   return (
-<HashRouter basename="/SurveyUI">
+<HashRouter basename="/SurveyUI/">
   <Routes>
     <Route path="/" element={<CreateSurvey bgImage={bgImage} setId={setId} setBgImage={setBgImage} token={token} />} />
     <Route path="/Survey/:id" element={<Survey bgImage={bgImage} id={id} setToken={setToken} token={token} />} />
