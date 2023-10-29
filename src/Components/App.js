@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, useParams } from 'react-router-dom';
 import CreateSurvey from './Views/createSurvey';
 import SavedSurvey from './Views/savedSurvey';
 import PreviewSurvey from './Views/previewSurvey';
