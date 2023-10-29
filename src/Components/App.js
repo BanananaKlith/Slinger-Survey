@@ -1,33 +1,55 @@
-
-import { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
 import CreateSurvey from './Views/createSurvey';
-import EditSurvey from './Views/editSurvey';
+import SavedSurvey from './Views/savedSurvey';
+import PreviewSurvey from './Views/previewSurvey';
+import Survey from './Survey/survey';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+function ConditionalRoute({bgImage,setBgImage,setId,setToken, token}) {
+  const { id } = useParams();
+  if (id.length > 20) {
+    return <SavedSurvey bgImage={bgImage} setBgImage={setBgImage} token={token} setToken={setToken} />;
+  } else {
+    return <CreateSurvey bgImage={bgImage} setId={setId} setBgImage={setBgImage} token={token} />;
+  }
+}
 
 function App() {
-
-  const [view,setView] = useState('createSurvey');
-
-   
- 
+  const [bgImage, setBgImage] = useState('previewSurveyContainer');
+  const [token, setToken] = useState(null);
+  const [id,setId]=useState(null)
+  useEffect(() => {
+    // Check if a token already exists in localStorage
+    const existingToken = localStorage.getItem('token');
+    if (existingToken) {
+      // If a token exists, use it
+      setToken(existingToken);
+    } else {
+      // If no token exists, retrieve the token
+      axios.get('http://localhost:3100/login')
+        .then((response) => {
+          setToken(response.data.token);
+          // Store the token in localStorage
+          localStorage.setItem('token', response.data.token);
+          console.log(response)
+        })
+        .catch((error) => {
+          console.error('Error logging in:', error);
+        });
+    }
+  }, []); // Empty dependency array means this effect runs once on mount
+  
 
   return (
-    <div>
-      {view === 'createSurvey' ? (
-        <>
-        <CreateSurvey setView={setView}/>
-         </>
-      ) :'editSurvey' ? (
-        <>
-        <EditSurvey setView={setView}/>
-        </>
-      ) :'sendSurvey'(
-        <>
-       
-        </>
-        )
-      }
-   
-    </div>
+    <Router>
+      <Routes>
+       <Route path="/" element={<CreateSurvey bgImage={bgImage} setId={setId} setBgImage={setBgImage} token={token} />} />
+       <Route path="/Survey/:id" element={<Survey bgImage={bgImage} id={id} setToken={setToken} token={token} />} />
+        <Route path="/:id" element={<ConditionalRoute bgImage={bgImage} setToken={setToken}setBgImage={setBgImage} token={token} />} />
+        <Route path="/Preview/:id" element={<PreviewSurvey setBgImage={setBgImage} token={token}/>} />
+      </Routes>
+    </Router>
   );
 }
 

@@ -1,20 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 .Title-Container{
-     display: flex;
-      justify-content: center;
+
+    margin: 1em;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
        align-items: center;
-       background-color: #372436;
-       color:white;
-       font-family:Comfortaa;
-       font-weight:bold;
-       text-transform:uppercase
+       gap: 1em;
+       color: #848484;
+       font-weight:500;
+       font-family: "Comfortaa"; 
+       background-color:#f4f4f4;
+       border: 1px solid #ded7d7;
+      
     }
-    .Title-Container:hover .Title-ContainerButton{
-        visibility: visible;
-    }
-    .Title-ContainerButton{
-        visibility: hidden;
-        background-color: transparent;
-        border: none;
-    }
+ .Title-Input{
+    width: 44em;
+    color: #252323db; 
+    border: 1px solid #ded7d7;
+    height: 2.2em;
+    text-align: left;
+    padding-left: 0.5em;
+    font-family: 'Martian Mono';
+    padding-top: 0.2em;
+ }
+ .Title-Container-Wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+ }
+ .Title-Wrapper-Select{
+   width:45em;
+   height:2.5em;
+    background-color: #fff;
+    border: 1px solid #ded7d7;
+    color: #252323db;
+    font-family: 'Martian Mono';
+    padding-top: 0.2em;
+ 
+ }
+ .Title-Select-Option{
+   font-weight: 200;
+   font-family: 'Martian Mono'!important;
+ }

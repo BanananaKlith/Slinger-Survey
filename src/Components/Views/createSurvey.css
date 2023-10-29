@@ -1,0 +1,316 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
+
+#firsth2{
+    font-family: 'Martian Mono', "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    align-self: center; 
+    font-weight: 400;
+    color: #ffff;
+    font-size: 2em;
+    padding-top: 2em;
+}
+#firstp{
+    font-family: 'Martian Mono', "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    align-self: center; 
+    font-weight:200;
+    color: #ffff;
+    font-size: 18px;
+    margin-top: -0.8em;
+    padding-bottom: 0.8em;
+}
+
+.createSurveyContainer{
+    background: linear-gradient(to right, #0555e6, #021b79);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+  }
+.browseButton{
+    border:groove;
+    background-color:transparent;
+    color:white;
+    margin:2em;
+    padding:1em;
+    border-radius:8%;
+    cursor:pointer
+}
+#icon{
+    max-width: 8em;
+    max-height: 7em;
+    margin-left: 8em;
+    cursor: pointer;
+}
+.frame{
+   padding:0 0 2em 0;
+    align-self: center;
+    background-color:#fcfcfc;
+    width:42em
+     
+
+}
+.firstDiv{
+    background-color: #f4f4f4;
+            
+}
+.CentralContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#QuestionButton{
+   width: 34em;
+    height: 3.5em;
+    border: none;
+    border-radius: 3px;
+    text-transform: uppercase;
+    color: #f4f4f4;
+  font-family: 'Martian Mono';
+  cursor: pointer;
+  text-align: center;
+  background-image: linear-gradient(to right,#ff512f 0%,#dd2476 51%,#ff512f 100%);
+  transition: background-position .5s linear;
+  background-size: 200% auto;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  font-size: 17px;
+  background-position: right bottom;
+  
+}
+#QuestionButton:hover {
+  background-position: left bottom; /* Add this line */
+}
+
+#CreateSurveyButton{
+   align-self: flex-end; 
+   font-family: 'Martian Mono';
+   border: none;
+   border-radius: 3px;
+   cursor: pointer;
+   color: #f4f4f4;
+   margin: 0.8em;
+   width: 13em;
+   height: 2.8em;
+   background-color: #00c6ff;
+  background-image: linear-gradient(to right,#00c6ff 0%,#0072ff 51%,#00c6ff 100%);
+  transition: background-position .5s linear;
+  background-size: 200% auto;
+  background-position: right bottom;
+}
+#PreviewSurveyButton{
+  align-self: flex-end; 
+  font-family: 'Martian Mono';
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  color: #f4f4f4;
+  margin: 0.8em;
+  width: 13em;
+  height: 2.8em;
+  background-color: #00c6ff;
+ background-image: linear-gradient(to right,#4776e6 0%,#8e54e9 51%,#4776e6 100%);
+ transition: background-position .5s linear;
+ background-size: 200% auto;
+ background-position: right bottom;
+}
+#CreateSurveyButton:hover{
+  background-position: left bottom;
+}
+#PreviewSurveyButton:hover{
+  background-position: left bottom;
+}
+.tabsWrapper{
+    margin-top: 0;
+    display: flex;
+    gap: 0.1em;
+  
+}
+.tabs{
+    font-family: 'Martian Mono';
+    font-size: 15px;
+    font-weight: 100;
+    background-color:#f4f4f4;
+    width:7em;
+    line-height: 2.5em;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    color: #252323db; 
+
+}
+.tabs:hover{
+  color:  #4046f1c1;
+  background-color:#d3d2d2;
+}/*rgb(226, 226, 226)*/
+.tabs.selected {
+  background-color: white;
+}
+
+.Container {  margin: 1em;
+    display: flex;
+    flex-direction: column;
+         padding: 1em;
+       gap: 1em;
+       color: #848484;
+       font-weight:500;
+       font-family: "Comfortaa"; 
+       background-color:rgba(0, 0, 255, 0.046);
+       border: 1px solid #ded7d7;
+       width: 38em;
+
+    }
+    .PopUpDivMenu {
+      box-sizing: border-box;
+      text-transform: uppercase;
+      width: 290px;
+      height: 250px;
+      background-color: #fcfcfc;
+      /* Centering */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      /*Display*/
+      display: flex;
+      flex-direction: column;
+      font-family: "Martian Mono";
+      font-weight: 100;
+      font-size: 10px;
+      gap: 3vh;
+    }
+    
+    .PopUpDivMenu .CloseButton {
+      align-self: flex-end;
+      cursor: pointer;
+    }
+    
+    .PopUpDivMenu .AnswersHeader{
+      display: flex;
+      color: #8b8b8b;
+      padding-left: 1em;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    
+    .PopUpDivMenu .PopUpButtons {
+      display: flex;
+      flex-direction: column;
+      padding: 1em;
+      gap:0.1em
+      
+    }
+    
+    .PopUpButtons>button {
+      display: flex;
+      align-items: center;
+      text-align: left;
+      font-family: "Martian Mono";
+      font-weight:200 ;
+      cursor:pointer;
+      height: 10vh;
+      border:1px solid transparent;
+      background-color: transparent;
+    }
+    
+    .PopUpButtons>button:hover {
+       background-color: rgba(0, 0, 255, 0.171)
+    }
+    
+    .themeContainer{ 
+        display: grid;
+        grid-template-columns: repeat(2, 2fr);
+        padding-top: 3em;
+        column-gap: em;
+    }
+    .themeContainer>p{
+        font-family: 'Martian Mono';
+    }
+    .imgContainer{
+        text-align: center;
+    } 
+    .imgContainer>p{
+      margin-top: -0.5em;
+    } 
+    .themeImage{
+        width:  18em;
+        height: 10em; 
+        cursor: pointer;
+    }
+    .imgContainer:hover>p, .imgContainer:active>p, .imgContainer:focus>p {
+        color: #4a50ee;
+    }
+    .themeImage:hover, .themeImage:active, .themeImage:focus {
+        border: 1px solid #4a50ee;
+    }
+    .themeImage.selected {
+      border: 2px solid #4a4feec1;
+    }
+    .themeImage.selected + p {
+      color: #4a50ee;
+    }
+    
+  .bgImage1{
+    background-image: url('../Images/bgImage1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;    
+    padding: 2em;
+    box-sizing: border-box;
+    min-height: 100vh; 
+    width: 100vw; 
+    align-items: center;
+ 
+  }
+  .bgImage2{
+    background-image: url('../Images/bgImage2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;    
+    padding: 2em;
+    box-sizing: border-box;
+    min-height: 100vh; 
+    width: 100vw; 
+    align-items: center;
+ 
+  }
+  .shareContainer{
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 25vh;
+  }
+  .shareContainer>h4{
+    padding-bottom:3vh;
+    font-family: "Martian Mono";
+    width: 40vw;
+    color: #0555e6;
+    text-align: center;
+    font-weight: 200;}
+  .shareContainerLink{
+    height:4vh;
+    padding: 0.5em;
+    width:32vw;
+    border-radius: 5px;
+    border: 1px solid #ded7d7 ; 
+    font-family: "Martian Mono";
+    font-weight:100 ;
+    cursor: pointer; 
+  }
+  .shareContainer>.shareButtons>button{
+    background-color: transparent;
+    border: 1px solid #ded7d7;
+    height: 6vh;
+    width: 5vw;
+    cursor: pointer;
+    font-family: "Martian Mono";
+    font-weight: 100;
+  }
+   .closeIcon:hover{
+    color: #ff0000 !important
+   }
+  .inputIcon{
+    color: rgba(0, 0, 255, 0.753) !important;
+  }

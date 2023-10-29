@@ -1,54 +1,41 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-.Container {display: flex;
-    flex-direction:column ;
-    justify-content: flex-start;
-    padding:2em;
-    align-items: flex-start;
-    background-color:white
-    }
+
 .QA-Wrapper{
     display:flex;
-    padding:0.2em;
-    flex-direction:column
+    flex-direction: column;
+    gap: 1em;
+    padding: 0.2em;
 }
-.QA-Wrapper-Questions{padding:"0.2em";
-display: flex; gap:2em;
+.QuestionInput{
+    width: 35em;
+    color: #252323db; 
+    border: 1px solid #ded7d7;
+    height: 2.2em;
+    text-align: left;
+    padding-left: 0.5em;
+    font-family: 'Martian Mono';
+    align-self: center;
 }
-.QA-Wrapper-Questions-EditButton{
-visibility: hidden;
-background-color: transparent;
-border: none;
-cursor: pointer;
+.IconWrapper{display: flex;
+    height: 2em;
+    padding-bottom: 0.2em;
+    margin-left: -1em;
+    margin-top: -0.6em;
+    gap: 0.6em;
 }
-.QA-Wrapper-Questions:hover .QA-Wrapper-Questions-EditButton{
-    visibility:visible;
-}
+.IconWrapper>.qButton{
+    background-color:transparent;
+    border:none;
+    cursor:pointer;
 
-.QA-Wrapper-Answers{
-    padding:0.2em;
-    display:flex;
-    gap:1em;
-    flex-direction:row;
-}
-.Buttons-Wrapper{
-    padding:2em;
-    display: flex;
-    gap: 2em;
-    
-}
-.Buttons-Wrapper-Add{
-    max-width:6em;
-     align-self:center;
-     background-color:transparent;
-     border:none;
-     cursor: pointer;
-    } 
-.Buttons-Wrapper-Send{
-    background-color: transparent;
-    border-style:groove;
-    border-radius: 0.5em;
-    align-content: center;
-    cursor: pointer;
-}
+  }
+  
+  .delIcon:hover {
+    color: rgba(0, 0, 255, 0.679) !important;
+  }
+  .qButton:hover{
+    background-color: rgba(0, 0, 255, 0.159);
+  }
+  

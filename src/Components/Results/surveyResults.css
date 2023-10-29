@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono&display=swap');
+
+.resultsTable {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+    font-family: "Martian Mono";
+    font-weight: 100;
+}
+
+.resultsTable th,
+.resultsTable td {
+    padding: 8px;
+    border: none;
+    font-weight: 100;
+}
+
+.resultsTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.resultsTable ul {
+    list-style-type: none;
+}
+
+.resultsTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.resultsTable tr:hover {
+    background-color: #ddd;
+}
+
+.resultsTable tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.resultsTable th:not(:last-child),
+.resultsTable td:not(:last-child) {
+    border-right: 1px solid #ddd;
+}

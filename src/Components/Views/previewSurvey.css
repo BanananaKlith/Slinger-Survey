@@ -1,0 +1,154 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
+
+
+.previewSurveyContainer{
+    background-image: url('../Images/bgImage.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;    
+    padding: 2em;
+    box-sizing: border-box;
+    min-height: 100vh; 
+    width: 100vw; 
+    align-items: center;
+
+  }
+  .bgImage1{
+   background-image: url('../Images/bgImage1.jpg');
+   background-size: cover;
+   background-repeat: no-repeat;
+   display: flex;
+   flex-direction: column;    
+   padding: 2em;
+   box-sizing: border-box;
+   height: 100vh; 
+   width: 100vw; 
+   align-items: center;
+
+ }
+ .bgImage2{
+   background-image: url('../Images/bgImage2.jpg');
+   background-size: cover;
+   background-repeat: no-repeat;
+   display: flex;
+   flex-direction: column;    
+   padding: 2em;
+   box-sizing: border-box;
+   height: 100vh; 
+   width: 100vw; 
+   align-items: center;
+
+ }
+  .previewframe{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     border-radius: 6px;
+     background-color: white;
+     padding:1em;
+     width: 80vw;
+     height: 70vh;
+
+ }
+ .previewframe>h1{
+    font-weight: 600;
+    font-size: 2.5em;
+ }
+ .prevContainer {
+    display: flex;
+    flex-direction: column;
+       color: #000000;
+       font-weight:500;
+       font-family: "Comfortaa"; 
+       background-color: transparent;
+    }
+    .prevContainer>h2{
+        font-size:1.5em;
+        align-self: center;
+    }
+
+    .prevContainer-Answers {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px; /* Adjust as needed */
+      
+    }
+    
+    .prevContainer-Answers > div {
+      display: flex;
+      align-items: center; /* Aligns the label and checkbox vertically */
+    }
+    
+    .prevContainer-Answers-Answer {
+      background-color: rgb(249, 249, 249);
+      line-height: 2em;
+      padding:1em;
+      width: 30em;
+      border: 1px solid #f4f4f4;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .prevContainer-Answers-Answer:hover {
+      box-shadow: 0 15px 15px rgba(16, 81, 185, 0.15)
+    }
+
+       
+      .prevContainer-Answers-Select-Wrapper{
+        display: flex;
+      }
+      .prevContainer-Answers-Select{
+        line-height: 0.7em;
+        width: 30em;
+        border: 1px solid #f4f4f4;
+        border-radius: 10px;
+        cursor: pointer;
+        background-color: transparent;
+        font-size: 1.5em;
+        color: black;
+      }
+      .selectInputLabel{
+        
+        font-family: "Martian Mono" !important;
+        font-weight: 200 !important;
+      }
+      .selectMenuItem{
+        font-family: "Martian Mono" !important;
+        font-weight: 200 !important;
+        background-color: transparent !important;
+        line-height: 5vh !important;
+      }
+      .selectMenuItem:hover{
+        background-color: rgb(249, 249, 249) !important;
+      }
+
+  .radioAnswers{cursor: pointer;}
+
+.backButton{
+  background-color: #000;
+  cursor: pointer;
+  border: 0px;
+   width: 8em;
+font-size: calc(15px + 0.390625vw);
+font-weight: 400;
+border-radius: 5px;
+line-height: 50px;
+align-self: flex-start;
+margin: 1em 5em 1em 0;
+color: white;
+}
+
+.nextButton{
+    background-color: #000;
+    cursor: pointer;
+    border: 0px;
+     width: 8em;
+  font-size: calc(15px + 0.390625vw);
+  font-weight: 400;
+  border-radius: 5px;
+  line-height: 50px;
+  align-self: flex-end;
+  margin: 1em 5em 1em 0;
+  color: white;
+}

@@ -1,37 +1,30 @@
-import { useState } from 'react';
-import { ModeEditOutline } from '@mui/icons-material';
-import './surveyAnswers.css';
+import "./surveyAnswers.css";
+import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function SurveyAnswers({ inputs, handleTextChange }) {
-  // Initialize an array of boolean states, one for each input
-  const [showInputs, setShowInputs] = useState(inputs.map(() => false));
-
-  // Function to toggle the visibility of a specific input
-  const toggleShowInput = (index) => {
-    const newShowInputs = [...showInputs];
-    newShowInputs[index] = !newShowInputs[index];
-    setShowInputs(newShowInputs);
+export default function SurveyAnswers({ selectQuestion,answers, updateAnswers,deleteAnswer}) {
+  const handleInputChange = (e, answerIndex) => {
+    const newAnswers = [...answers];
+    newAnswers[answerIndex] = e.target.value;
+    updateAnswers(newAnswers);
   };
 
   return (
-    <div className="Answers-Container">
-      {inputs.map((input, index) => (
-        <div className="Container-Wrapper" key={index}>
-          <label htmlFor={`text-input-${index}`}>{input.textAnswer}</label>
-          {showInputs[index] && (
-            <input
-              type="text"
-              id={`text-input-${index}`}
-              value={input.textAnswer}
-              onChange={(e) => handleTextChange(index, e.target.value)}
-            />
+    <div className="Answers-Container" >
+      {answers.map((answer, answerIndex) => (
+        <div className="Container-Wrapper" key={answerIndex}>
+          <input
+            type="text"
+            value={answer}
+            onChange={(e) => handleInputChange(e, answerIndex)}
+            className="inputStyle"
+            placeholder="Answer"
+            onClick={selectQuestion}
+          />
+          {answerIndex !== answers.length - 1 && ( // Check if it's not the last answer
+            <button className="deleteButton" onClick={deleteAnswer}>
+              <DeleteIcon className="adelIcon" style={{color:"grey"}}/>
+            </button>
           )}
-          <button
-            className="Container-Wrapper-Button"
-            onClick={() => toggleShowInput(index)} // Pass the index to the toggle function
-          >
-            <ModeEditOutline />
-          </button>
         </div>
       ))}
     </div>
