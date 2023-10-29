@@ -44,10 +44,10 @@ function App() {
   return (
     <Router>
       <Routes>
-       <Route path="/" element={<CreateSurvey bgImage={bgImage} setId={setId} setBgImage={setBgImage} token={token} />} />
-       <Route path="/Survey/:id" element={<Survey bgImage={bgImage} id={id} setToken={setToken} token={token} />} />
-        <Route path="/:id" element={<ConditionalRoute bgImage={bgImage} setToken={setToken}setBgImage={setBgImage} token={token} />} />
-        <Route path="/Preview/:id" element={<PreviewSurvey setBgImage={setBgImage} token={token}/>} />
+       <Route path="SurveyUI/" element={<CreateSurvey bgImage={bgImage} setId={setId} setBgImage={setBgImage} token={token} />} />
+       <Route path="SurveyUI/Survey/:id" element={<Survey bgImage={bgImage} id={id} setToken={setToken} token={token} />} />
+        <Route path="SurveyUI/:id" element={<ConditionalRoute bgImage={bgImage} setToken={setToken}setBgImage={setBgImage} token={token} />} />
+        <Route path="SurveyUI/Preview/:id" element={<PreviewSurvey setBgImage={setBgImage} token={token}/>} />
       </Routes>
     </Router>
   );

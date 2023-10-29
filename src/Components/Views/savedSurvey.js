@@ -156,7 +156,7 @@ const previewSurvey = () => {
       headers: { Authorization: `Bearer ${token}` }
     }).then((response) => {
       console.log('Database updated successfully:', response.data);
-        window.open(window.location.origin + "/Preview/" + id+ "?bgImage=" + encodeURIComponent(bgImage) + "&token=" + encodeURIComponent(token), "_blank");
+        window.open(window.location.origin + "/SurveyUI/Preview/" + id+ "?bgImage=" + encodeURIComponent(bgImage) + "&token=" + encodeURIComponent(token), "_blank");
       })
     .catch((error) => {
       console.error('Error updating database:', error);
@@ -184,7 +184,7 @@ const createSurveyLink=()=>{
         .catch((error) => {
           console.error('Error updating database:', error);
         });
-      const url=window.location.origin + "/Survey/" + id + "?bgImage=" + encodeURIComponent(bgImage) + "&token=" + encodeURIComponent(token);
+      const url=window.location.origin + "/SurveyUI/Survey/" + id + "?bgImage=" + encodeURIComponent(bgImage) + "&token=" + encodeURIComponent(token);
       setSurveyLink(url);
        console.log(token);
 
@@ -194,7 +194,7 @@ const createSurveyLink=()=>{
   };
 
 const surveyAssessment=()=>{
-  const url=window.location.origin + "/Survey/" + id + "?bgImage=" + encodeURIComponent(bgImage) + "&token=" + encodeURIComponent(token);
+  const url=window.location.origin + "/SurveyUI/Survey/" + id + "?bgImage=" + encodeURIComponent(bgImage) + "&token=" + encodeURIComponent(token);
   setSurveyLink(url);
   window.open(url, "_blank");
     

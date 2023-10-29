@@ -173,7 +173,7 @@ const createSurveyLink = () => {
     setCurrentTab("Share");
 
     // Generate the survey link
-    const url = `${window.location.origin}/Survey/${response.data.id}?bgImage=${encodeURIComponent(bgImage)}&token=${encodeURIComponent(token)}`;
+    const url = `${window.location.origin}/SurveyUI/Survey/${response.data.id}?bgImage=${encodeURIComponent(bgImage)}&token=${encodeURIComponent(token)}`;
     setSurveyLink(url);
     console.log(`Token: ${token}`);
     console.log(`ID: ${response.data.id}`);
@@ -216,7 +216,7 @@ const previewSurvey=()=>{   if (questions[0].question === "") {
         // Handle success response
         console.log('Survey saved successfully:', response.data);
         const url = response.data.id;
-        window.open(window.location.origin + "/Preview/" + url + "?bgImage=" + encodeURIComponent(bgImage) + "&token=" + encodeURIComponent(token), "_blank");
+        window.open(window.location.origin + "/SurveyUI/Preview/" + url + "?bgImage=" + encodeURIComponent(bgImage) + "&token=" + encodeURIComponent(token), "_blank");
       }).catch((error) => {
         // Handle error
         console.error('Error saving survey:', error);
@@ -238,7 +238,7 @@ axios.get(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/ResGet/${token}`)
 });
 }
 const surveyAssessment=()=>{
-  const url=window.location.origin + "/Survey/" + id + "?bgImage=" + encodeURIComponent(bgImage) + "&token=" + encodeURIComponent(token);
+  const url=window.location.origin + "/SurveyUI/Survey/" + id + "?bgImage=" + encodeURIComponent(bgImage) + "&token=" + encodeURIComponent(token);
   setSurveyLink(url);
   window.open(url, "_blank");
     
