@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/SurveyUI/static/css/main.cc6290a4.css",
-    "main.js": "/SurveyUI/static/js/main.d001348c.js",
+    "main.js": "/SurveyUI/static/js/main.b5e9a2ab.js",
     "static/media/zionicon.png": "/SurveyUI/static/media/zionicon.7ee8b1787575213185f7.png",
     "static/media/bgImage2.jpg": "/SurveyUI/static/media/bgImage2.7c534b49eb82845644d0.jpg",
     "static/media/bgImage.jpg": "/SurveyUI/static/media/bgImage.a323d3c1172c1252c40a.jpg",
     "static/media/bgImage1.jpg": "/SurveyUI/static/media/bgImage1.5f59d57005093879ecf7.jpg",
     "index.html": "/SurveyUI/index.html",
     "main.cc6290a4.css.map": "/SurveyUI/static/css/main.cc6290a4.css.map",
-    "main.d001348c.js.map": "/SurveyUI/static/js/main.d001348c.js.map"
+    "main.b5e9a2ab.js.map": "/SurveyUI/static/js/main.b5e9a2ab.js.map"
   },
   "entrypoints": [
     "static/css/main.cc6290a4.css",
-    "static/js/main.d001348c.js"
+    "static/js/main.b5e9a2ab.js"
   ]
 }
