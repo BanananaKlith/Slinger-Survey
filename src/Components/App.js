@@ -1,4 +1,4 @@
-import { HashRouter, Route, Routes, useParams } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, useParams } from 'react-router-dom';
 import CreateSurvey from './Views/createSurvey';
 import SavedSurvey from './Views/savedSurvey';
 import PreviewSurvey from './Views/previewSurvey';
@@ -42,17 +42,14 @@ function App() {
   
 
   return (
-<HashRouter basename="/SurveyUI/">
-  <Routes>
-    <Route path="/" element={<CreateSurvey bgImage={bgImage} setId={setId} setBgImage={setBgImage} token={token} />} />
-    <Route path="/Survey/:id" element={<Survey bgImage={bgImage} id={id} setToken={setToken} token={token} />} />
-    <Route path="/:id" element={<ConditionalRoute bgImage={bgImage} setToken={setToken}setBgImage={setBgImage} token={token} />} />
-    <Route path="/Preview/:id" element={<PreviewSurvey setBgImage={setBgImage} token={token}/>} />
-  </Routes>
-</HashRouter>
-
-
-
+    <Router basename="/SurveyUI/">
+      <Routes>
+       <Route path="/" element={<CreateSurvey bgImage={bgImage} setId={setId} setBgImage={setBgImage} token={token} />} />
+       <Route path="/Survey/:id" element={<Survey bgImage={bgImage} id={id} setToken={setToken} token={token} />} />
+        <Route path="/:id" element={<ConditionalRoute bgImage={bgImage} setToken={setToken}setBgImage={setBgImage} token={token} />} />
+        <Route path="/Preview/:id" element={<PreviewSurvey setBgImage={setBgImage} token={token}/>} />
+      </Routes>
+    </Router>
   );
 }
 
