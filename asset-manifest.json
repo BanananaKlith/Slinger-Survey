@@ -1,13 +1,17 @@
 {
   "files": {
-    "main.css": "/Survey/static/css/main.f85e3d0e.css",
-    "main.js": "/Survey/static/js/main.f0a0d325.js",
+    "main.css": "/Survey/static/css/main.1f20cdc2.css",
+    "main.js": "/Survey/static/js/main.77981589.js",
+    "static/media/zionicon.png": "/Survey/static/media/zionicon.7ee8b1787575213185f7.png",
+    "static/media/bgImage2.jpg": "/Survey/static/media/bgImage2.7c534b49eb82845644d0.jpg",
+    "static/media/bgImage.jpg": "/Survey/static/media/bgImage.a323d3c1172c1252c40a.jpg",
+    "static/media/bgImage1.jpg": "/Survey/static/media/bgImage1.5f59d57005093879ecf7.jpg",
     "index.html": "/Survey/index.html",
-    "main.f85e3d0e.css.map": "/Survey/static/css/main.f85e3d0e.css.map",
-    "main.f0a0d325.js.map": "/Survey/static/js/main.f0a0d325.js.map"
+    "main.1f20cdc2.css.map": "/Survey/static/css/main.1f20cdc2.css.map",
+    "main.77981589.js.map": "/Survey/static/js/main.77981589.js.map"
   },
   "entrypoints": [
-    "static/css/main.f85e3d0e.css",
-    "static/js/main.f0a0d325.js"
+    "static/css/main.1f20cdc2.css",
+    "static/js/main.77981589.js"
   ]
 }
