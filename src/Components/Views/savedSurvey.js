@@ -35,7 +35,7 @@ function SavedSurvey({bgImage, setBgImage,token,setToken}) {
       console.log(token);
     } else {
       // If no token exists, retrieve the token
-      axios.get('http://localhost:3100/login')
+      axios.get('https://apitestdocfile-4yzlt7tvdq-no.a.run.app/login')
         .then((response) => {
           setToken(response.data.token);
           // Store the token in localStorage
@@ -56,7 +56,7 @@ function SavedSurvey({bgImage, setBgImage,token,setToken}) {
   
       console.log(token)
       console.log(id);
-      axios.get(`http://localhost:3100/QAsGet/${id}`, { headers: { Authorization: `Bearer ${token}` }})
+      axios.get(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsGet/${id}`, { headers: { Authorization: `Bearer ${token}` }})
         .then((response) => {
           console.log('Data retrieved successfully:', response.data);
           let data = response.data.data;
@@ -152,7 +152,7 @@ const previewSurvey = () => {
   };
 
     // Update the database
-    axios.put(`http://localhost:3100/QAsPut/${id}`, surveyData, {
+    axios.put(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsPut/${id}`, surveyData, {
       headers: { Authorization: `Bearer ${token}` }
     }).then((response) => {
       console.log('Database updated successfully:', response.data);
@@ -174,7 +174,7 @@ const createSurveyLink=()=>{
         return question.question.trim() !== "" && question.answers.some(answer => answer.trim() !== "");
       });
         // Update the database
-        axios.put(`http://localhost:3100/QAsPut/${id}`, {
+        axios.put(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsPut/${id}`, {
           questions: filteredQuestions,
           title: title
         }, { headers: { Authorization: `Bearer ${token}` }})
@@ -249,7 +249,7 @@ const changeAnswerType = (questionIndex) => {
 };
 
 const getResults=()=>{
-          axios.get(`http://localhost:3100/ResGet/${token}`)
+          axios.get(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/ResGet/${token}`)
           .then((response) => {
             // Handle success
             console.log('Data retrieved successfully:', response.data);

@@ -22,7 +22,7 @@ function PreviewSurvey() {
     const [selectedValue, setSelectedValue] = useState("");
     useEffect(() => {
       if (id) {
-        axios.get(`http://localhost:3100/QAsGet/${id}`,{
+        axios.get(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsGet/${id}`,{
             headers: { Authorization: `Bearer ${token}` }})
           .then((response) => {
             console.log('Data retrieved successfully:', response.data);

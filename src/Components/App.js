@@ -27,7 +27,7 @@ function App() {
       setToken(existingToken);
     } else {
       // If no token exists, retrieve the token
-      axios.get('http://localhost:3100/login')
+      axios.get('https://apitestdocfile-4yzlt7tvdq-no.a.run.app/login')
         .then((response) => {
           setToken(response.data.token);
           // Store the token in localStorage

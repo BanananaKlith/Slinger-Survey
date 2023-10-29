@@ -26,7 +26,7 @@ export default function Survey({setToken}) {
       setToken(existingToken);
     } else {
       // If no token exists, retrieve the token
-      axios.get('http://localhost:3100/login')
+      axios.get('https://apitestdocfile-4yzlt7tvdq-no.a.run.app/login')
         .then((response) => {
           setToken(response.data.token);
           // Store the token in localStorage
@@ -39,7 +39,7 @@ export default function Survey({setToken}) {
     }
     if (token) {
       console.log(id)
-      axios.get(`http://localhost:3100/QAsGet/${id}`,{
+      axios.get(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsGet/${id}`,{
         headers: { Authorization: `Bearer ${token}` }})
       .then((response) => {
         console.log('Data retrieved successfully:', response.data);
@@ -99,7 +99,7 @@ const sendPostRequest = async (questions, selectedAnswers) => {
 
   try {
     // Send a post request with axios
-    const response = await axios.post('http://localhost:3100/ResPost', {
+    const response = await axios.post('https://apitestdocfile-4yzlt7tvdq-no.a.run.app/ResPost', {
       title: data.title, // replace with your actual title
       questions: formattedAnswers,
       surveyId: id, // replace with your actual surveyId

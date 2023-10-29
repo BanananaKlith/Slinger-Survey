@@ -92,7 +92,7 @@ const createNewSurvey = () => {
   };
 
   // Send the POST request using Axios
-  axios.post('http://localhost:3100/QAsPost', surveyData, {
+  axios.post('https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsPost', surveyData, {
     headers: { Authorization: `Bearer ${token}` }
   }).then((response) => {
       // Handle success response
@@ -163,7 +163,7 @@ const createSurveyLink = () => {
   };
 
   // Send the POST request using Axios
-  axios.post('http://localhost:3100/QAsPost', surveyData, {
+  axios.post('https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsPost', surveyData, {
     headers: { Authorization: `Bearer ${token}` }
   })
   .then((response) => {
@@ -210,7 +210,7 @@ const previewSurvey=()=>{   if (questions[0].question === "") {
   };
 
   // Send the POST request using Axios
-  axios.post('http://localhost:3100/QAsPost', surveyData, {
+  axios.post('https://apitestdocfile-4yzlt7tvdq-no.a.run.app/QAsPost', surveyData, {
         headers: { Authorization: `Bearer ${token}` }
       }).then((response) => {
         // Handle success response
@@ -226,7 +226,7 @@ const previewSurvey=()=>{   if (questions[0].question === "") {
               }
 
 const getResults=()=>{
-axios.get(`http://localhost:3100/ResGet/${token}`)
+axios.get(`https://apitestdocfile-4yzlt7tvdq-no.a.run.app/ResGet/${token}`)
 .then((response) => {
   // Handle success
   console.log('Data retrieved successfully:', response.data);
